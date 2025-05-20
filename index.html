@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OtakuStream - Anime Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Navigation -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="text-2xl font-bold text-red-600">OtakuStream</div>
+      <button class="md:hidden text-2xl" onclick="toggleMenu()">☰</button>
+      <nav id="navMenu" class="hidden md:flex gap-6 items-center">
+        <input type="text" placeholder="Search Anime..." class="border rounded px-3 py-1" />
+        <a href="#" class="hover:text-red-500">Home</a>
+        <a href="#" class="hover:text-red-500">Genres</a>
+        <a href="#" class="hover:text-red-500">Trending</a>
+        <a href="#" class="hover:text-red-500">Favorites</a>
+      </nav>
+    </div>
+    <!-- Mobile nav -->
+    <div id="mobileNav" class="md:hidden hidden flex-col bg-white px-4 pb-2">
+      <input type="text" placeholder="Search Anime..." class="border rounded px-3 py-1 mb-2" />
+      <a href="#" class="py-1 block hover:text-red-500">Home</a>
+      <a href="#" class="py-1 block hover:text-red-500">Genres</a>
+      <a href="#" class="py-1 block hover:text-red-500">Trending</a>
+      <a href="#" class="py-1 block hover:text-red-500">Favorites</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="p-4 max-w-6xl mx-auto">
+
+    <!-- Anime Details -->
+    <section class="flex flex-col md:flex-row gap-6 mt-6">
+      <img src="https://i.imgur.com/e1hLQ2A.jpg" alt="Anime Cover" class="w-full md:w-64 rounded shadow">
+      <div class="space-y-4">
+        <h1 class="text-3xl font-bold">Attack on Titan</h1>
+        <p class="text-gray-700">In a world where giant humanoid Titans prey on humans, Eren joins the scout regiment to get revenge on the monsters who destroyed his hometown.</p>
+        <p><strong>Genres:</strong> Action, Drama, Fantasy</p>
+        <p><strong>Release Date:</strong> April 6, 2013</p>
+        <p><strong>Rating:</strong> 9.0/10</p>
+      </div>
+    </section>
+
+    <!-- Episodes -->
+    <section class="mt-10">
+      <h2 class="text-2xl font-semibold mb-4">Episodes</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="bg-gray-100 rounded shadow overflow-hidden">
+          <img src="https://i.imgur.com/EaFv3ef.jpg" alt="Episode 1" class="w-full h-40 object-cover">
+          <div class="p-2">
+            <p class="font-semibold">Episode 1: To You, in 2000 Years</p>
+            <button class="mt-2 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600">Play</button>
+          </div>
+        </div>
+        <div class="bg-gray-100 rounded shadow overflow-hidden">
+          <img src="https://i.imgur.com/hxKQAmu.jpg" alt="Episode 2" class="w-full h-40 object-cover">
+          <div class="p-2">
+            <p class="font-semibold">Episode 2: That Day</p>
+            <button class="mt-2 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600">Play</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="mt-10 bg-gray-100 p-6 rounded-lg shadow">
+      <h2 class="text-xl font-semibold mb-4">Upload Your Anime Clip</h2>
+      <input type="file" id="videoInput" accept="video/*" class="w-full mb-3 p-2 border rounded">
+      <button onclick="uploadVideo()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Upload</button>
+    </section>
+
+    <!-- Google Ads -->
+    <div class="ads bg-white text-center py-4 rounded mt-8 shadow">
+      <!-- Replace with actual AdSense code -->
+      <p>Ad Placeholder (Google Ads here)</p>
+    </div>
+
+    <!-- Uploaded Video Gallery -->
+    <section class="mt-10">
+      <h2 class="text-2xl font-semibold mb-4">Your Uploaded Videos</h2>
+      <div id="videoGallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Uploaded videos appear here -->
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navMenu").classList.toggle("hidden");
+      document.getElementById("mobileNav").classList.toggle("hidden");
+    }
+
+    function uploadVideo() {
+      const input = document.getElementById('videoInput');
+      if (input.files.length === 0) {
+        alert("Please select a video.");
+        return;
+      }
+
+      const file = input.files[0];
+      const url = URL.createObjectURL(file);
+      const gallery = document.getElementById('videoGallery');
+      const card = document.createElement('div');
+      card.className = 'bg-gray-200 p-3 rounded shadow';
+      card.innerHTML = `
+        <video controls src="${url}" class="w-full rounded"></video>
+        <a href="${url}" download="${file.name}" class="block text-blue-600 mt-2">Download</a>
+      `;
+      gallery.appendChild(card);
+    }
+  </script>
+
+</body>
+</html>
